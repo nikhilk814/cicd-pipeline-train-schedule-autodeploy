@@ -46,9 +46,7 @@ pipeline {
                 CANARY_REPLICAS = 1
             }
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig'
-                )
+                
                 sh 'kubectl apply -f train-schedule-kube-canary.yml'
                 sh 'kubectl rollout status deployment/train-schedule-canary'
                   
@@ -64,9 +62,7 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig'
-                )
+                
                 sh 'kubectl apply -f train-schedule-kube-canary.yml'
                 sh 'kubectl rollout status deployment/train-schedule-canary'
                 sh 'kubectl apply -f train-schedule-kube.yml'
