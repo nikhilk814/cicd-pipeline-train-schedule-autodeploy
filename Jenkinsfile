@@ -47,8 +47,8 @@ pipeline {
             }
             steps {
                 
-                sh 'kubectl apply -f train-schedule-kube-canary.yml'
-                sh 'kubectl rollout status deployment/train-schedule-canary'
+                sh 'sudo kubectl apply -f train-schedule-kube-canary.yml'
+                sh 'sudo kubectl rollout status deployment/train-schedule-canary'
                   
             }
         }
@@ -63,10 +63,10 @@ pipeline {
                 input 'Deploy to Production?'
                 milestone(1)
                 
-                sh 'kubectl apply -f train-schedule-kube-canary.yml'
-                sh 'kubectl rollout status deployment/train-schedule-canary'
-                sh 'kubectl apply -f train-schedule-kube.yml'
-                sh 'kubectl rollout status deployment/train-schedule'
+                sh 'sudo kubectl apply -f train-schedule-kube-canary.yml'
+                sh 'sudo kubectl rollout status deployment/train-schedule-canary'
+                sh 'sudo kubectl apply -f train-schedule-kube.yml'
+                sh 'sudo kubectl rollout status deployment/train-schedule'
             }
         }
     }
