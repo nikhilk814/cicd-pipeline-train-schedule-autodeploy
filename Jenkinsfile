@@ -108,3 +108,24 @@ pipeline {
         }
     }
 }
+post {
+        cleanup {
+           stage('CanaryDeploy') {
+            when {
+                branch 'master'
+            }
+            environment { 
+                CANARY_REPLICAS = 1
+            }
+            steps {
+                 sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
+            )
+        }
+    }
+}
+
+
+
+
+
+
