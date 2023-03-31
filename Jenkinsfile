@@ -9,6 +9,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
+                sh 'whoami'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
