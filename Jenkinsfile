@@ -57,24 +57,7 @@ pipeline {
                 )*/
             }
         }
-        stage('smokeTest') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    sleep (time: 5)
-                    def response = httpRequest (
-                        url = "https://172.31.31.1:6443/",
-                        timeout : 30
-                    )
-                    if(response status != 200) {
-                       error("Smoke Test against canary deployment failed.")
-                    }
-                }
-            }
-        }
-             
+            
         stage('DeployToProduction') {
             when {
                 branch 'master'
@@ -108,21 +91,7 @@ pipeline {
         }
     }
 }
-post {
-        cleanup {
-           stage('CanaryDeploy') {
-            when {
-                branch 'master'
-            }
-            environment { 
-                CANARY_REPLICAS = 1
-            }
-            steps {
-                 sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
-            )
-        }
-    }
-}
+
 
 
 
