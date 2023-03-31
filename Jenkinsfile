@@ -47,11 +47,14 @@ pipeline {
                 CANARY_REPLICAS = 1
             }
             steps {
-                kubernetesDeploy(
+                 sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
+          
+                
+               /* kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube-canary.yml',
                     enableConfigSubstitution: true
-                )
+                )*/
             }
         }
         stage('DeployToProduction') {
