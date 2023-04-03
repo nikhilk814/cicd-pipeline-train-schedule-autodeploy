@@ -91,8 +91,7 @@ pipeline {
         cleanup {
             steps{
                 sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
-                
-            )
+ 
         }
     }
 }
