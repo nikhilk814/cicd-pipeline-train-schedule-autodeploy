@@ -48,6 +48,7 @@ pipeline {
             }
             steps {
                  sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
+                sh 'kubectl set image deployments/{train-schedule-deployment-canary}{train-schedule}=nikhilk814/train-schedule:$BUILD_NUMBER'
           
                 
                /* kubernetesDeploy(
@@ -68,6 +69,7 @@ pipeline {
             }
             steps{
                 sh 'kubectl apply --kubeconfig=/home/edureka/.kube/config -f train-schedule-kube-canary.yml'
+                 sh 'kubectl set image deployments/{train-schedule-deployment-canary}{train-schedule}=nikhilk814/train-schedule:$BUILD_NUMBER'
             }
         }
     }
